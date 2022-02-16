@@ -7,7 +7,7 @@ const databaseConn = async ()=>{
         useNewUrlParser: true
     })
 
-    console.log(`Database connected at: ${conn.connection.host}`.cyan.bold.inverse)
+    console.log(`Database connected successfully at: ${conn.connection.host}`.cyan.bold.inverse)
 }
 
 module.exports = databaseConn
