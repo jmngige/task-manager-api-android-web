@@ -1,6 +1,7 @@
 const Task = require('../models/task')
 const ErrorResponse = require('../utils/errorResponse')
 const asyncHandler = require('../middlewares/asyncError')
+const ApiFilters = require('../utils/filter')
 
 //===================== create tasks=============================
 exports.createTask = asyncHandler (async(req, res, next)=>{
@@ -16,7 +17,15 @@ exports.createTask = asyncHandler (async(req, res, next)=>{
 
 //===================== get all tasks=============================
 exports.getTasks = asyncHandler (async (req, res, next)=>{
-    const tasks = await Task.find()
+    
+    const api = new ApiFilters(Task.find(), req.query)
+                 .filter()
+                 .sort()
+                 .select()
+                .paginate()
+    
+    
+    const tasks = await api.query
 
     if(!tasks){
         return next(new ErrorResponse("No tasks found at the moment", 404))

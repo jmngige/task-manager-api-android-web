@@ -12,13 +12,14 @@ dotenv.config({path: './config/.env'})
 //handle any uncaught exceptions
 process.on('uncaughtException', err=>{
     console.log(err.message)
-    console.log(err.stack)
+    console.log(err)
     process.exit(1)
 })
 
 //load application routes
 const taskRoutes = require('./routes/task')
 const userRoutes = require('./routes/user')
+const authRoutes = require('./routes/auth')
 
 
 //initialize database promise
@@ -31,6 +32,7 @@ app.use(bp.json())
 //
 app.use('/api/v1', taskRoutes)
 app.use('/api/v1', userRoutes)
+app.use('/api/v1', authRoutes)
 
 //load the error handling middleware
 app.use(errorHandler)

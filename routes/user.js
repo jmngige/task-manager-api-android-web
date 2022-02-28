@@ -2,20 +2,19 @@ const express = require('express')
 const router = express.Router()
 
 const userRouter = require('../controllers/user')
+const auth = require('../middlewares/auth')
 
-//create user router
-router.route('/user').post(userRouter.createUser)
 
 //get all users
-router.route('/user').get(userRouter.getUsers)
+router.route('/user').get(auth, userRouter.getUsers)
 
 //get user profile
-router.route('/user/:id').get(userRouter.getProfile)
+router.route('/user/:id').get(auth, userRouter.getProfile)
 
 //update user profile
-router.route('/user/:id').put(userRouter.updateProfile)
+router.route('/user/:id').put(auth, userRouter.updateProfile)
 
 //delete user profile
-router.route('/user/:id').delete(userRouter.deleteUser)
+router.route('/user/:id').delete(auth, userRouter.deleteUser)
 
 module.exports = router

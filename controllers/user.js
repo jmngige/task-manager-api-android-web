@@ -3,17 +3,6 @@ const ErrorResponse = require('../utils/errorResponse')
 const asyncHandler = require('../middlewares/asyncError')
 
 
-//===================== Create user account ============================
-exports.createUser = asyncHandler ( async (req, res, next)=>{
-
-    const user = await User.create(req.body)
-
-    res.status(201).json({
-        success: true,
-        user
-    })
-})
-
 //===================== Get all users ============================
 exports.getUsers = asyncHandler (async (req, res, next)=>{
     const users = await User.find()
