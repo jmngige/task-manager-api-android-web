@@ -16,7 +16,7 @@ exports.loginUser = asyncHandler (async (req, res, next)=>{
     const {email , password} = req.body
 
     if(!email || !password){
-        return next(new ErrorResponse("Please enter your email and password corretly", 400))
+        return next(new ErrorResponse("Please enter your email and password correctly", 400))
     }
 
     const user = await User.findOne({email}).select('+password')

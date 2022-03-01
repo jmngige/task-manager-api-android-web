@@ -20,6 +20,7 @@ exports.getUsers = asyncHandler (async (req, res, next)=>{
 
 //===================== get user profile ============================
 exports.getProfile = asyncHandler (async (req, res, next)=>{
+
     const user = await User.findById(req.params.id)
 
     if(!user){
@@ -52,7 +53,8 @@ exports.updateProfile = asyncHandler (async (req, res, next)=>{
     })
 })
 
-//===================== update user profile ============================
+//===================== delete user profile ============================
+//========== To delete files associated with a user check the user model file ====
 exports.deleteUser = asyncHandler (async (req, res, next)=>{
     let user = await User.findById(req.params.id)
 
@@ -61,6 +63,11 @@ exports.deleteUser = asyncHandler (async (req, res, next)=>{
     }
 
     user = await User.findByIdAndDelete(req.params.id)
+
+    res.cookie('token', 'none', {
+        expires: new Date(Date.now()),
+        httpOnly: true
+    })
 
     res.status(200).json({
         success:true,
