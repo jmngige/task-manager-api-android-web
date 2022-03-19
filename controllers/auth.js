@@ -34,7 +34,7 @@ exports.loginUser = asyncHandler (async (req, res, next)=>{
     saveToken(user, 200, res)
 })
 
-//===================== Login user into account ============================
+//===================== Logout user from account ============================
 exports.logoutUser = asyncHandler (async (req, res, next)=>{
     res.cookie('token', 'none', {
         

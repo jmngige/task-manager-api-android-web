@@ -68,7 +68,6 @@ userSchema.pre("save", async function(next){
 //delete files associated with user
 userSchema.pre('remove', async function(next){
     await Task.deleteMany({ user: this._id})
-
     next()
 })
 
