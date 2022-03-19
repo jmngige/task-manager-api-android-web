@@ -37,7 +37,7 @@ app.use('/api/v1', authRoutes)
 //load the error handling middleware
 app.use(errorHandler)
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 const server = app.listen(PORT, err=>{
     console.log(`Server is up and running on port ${process.env.PORT}`.green.inverse)
 })
