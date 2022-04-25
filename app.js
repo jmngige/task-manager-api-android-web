@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const app = express()
 const bp = require('body-parser')
+const bodyParser = require('body-parser')
 const dbConnection = require('./config/database')
 require('colors')
 const errorHandler = require('./middlewares/error.js')
@@ -28,6 +29,8 @@ dbConnection()
 //implement body parser
 app.use(express.json())
 app.use(bp.json())
+app.use(bodyParser.urlencoded({extended : true}))
+app.use(express.static("public"))
 
 //
 app.use('/api/v1', taskRoutes)
