@@ -7,12 +7,22 @@ const asyncHandler = require('../middlewares/asyncError')
 //===================== Create user account ============================
 exports.createUser = asyncHandler ( async (req, res, next)=>{
 
-    const user = await User.create(req.body)
+    const {fullName, email, phone, usage, role, password } = req.body
+
+    const user = await User.create({
+        fullName,
+        email,
+        phone,
+        usage,
+        role,
+        password
+    })
 
     saveToken(user, 200, res)
 })
 //===================== Login user into account ============================
 exports.loginUser = asyncHandler (async (req, res, next)=>{
+    
     const {email , password} = req.body
 
     if(!email || !password){
