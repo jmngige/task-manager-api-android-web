@@ -9,12 +9,12 @@ const auth = require('../middlewares/auth')
 router.route('/user').get(auth, userRouter.getUsers)
 
 //get user profile
-router.route('/user/:id').get(auth, userRouter.getProfile)
+router.route('/user/profile').get(auth, userRouter.getProfile)
 
 //update user profile
-router.route('/user/:id').put(auth, userRouter.updateProfile)
+router.route('/user/profile').put(auth, userRouter.updateProfile)
 
 //delete user profile
-router.route('/user/:id').delete(auth, userRouter.deleteUser)
+router.route('/user/profile').delete(auth, userRouter.deleteUser)
 
 module.exports = router

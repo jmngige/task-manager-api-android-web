@@ -21,7 +21,7 @@ exports.getUsers = asyncHandler (async (req, res, next)=>{
 //===================== get user profile ============================
 exports.getProfile = asyncHandler (async (req, res, next)=>{
 
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.user.id)
 
     if(!user){
         return next(new ErrorResponse("User profile not found", 404))
@@ -35,7 +35,7 @@ exports.getProfile = asyncHandler (async (req, res, next)=>{
 
 //===================== update user profile ============================
 exports.updateProfile = asyncHandler (async (req, res, next)=>{
-    let user = await User.findById(req.params.id)
+    let user = await User.findById(req.user.id)
 
     if(!user){
         return next(new ErrorResponse("User profile not found", 404))
@@ -56,13 +56,13 @@ exports.updateProfile = asyncHandler (async (req, res, next)=>{
 //===================== delete user profile ============================
 //========== To delete files associated with a user check the user model file ====
 exports.deleteUser = asyncHandler (async (req, res, next)=>{
-    let user = await User.findById(req.params.id)
+    let user = await User.findById(req.user.id)
 
     if(!user){
         return next(new ErrorResponse("User profile not found", 404))
     }
 
-    user = await User.findByIdAndDelete(req.params.id)
+    user = await User.findByIdAndDelete(req.user.id)
 
     res.cookie('token', 'none', {
         expires: new Date(Date.now()),
